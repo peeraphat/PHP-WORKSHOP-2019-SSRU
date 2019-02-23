@@ -40,6 +40,12 @@
             WHERE board_id = '$boardId' ";
     $query = $conn->query($sql);
     $result = $query->fetch(PDO::FETCH_ASSOC);
+
+    $sqlComment = "SELECT * FROM table_comment 
+                    WHERE comment_board_id = '$boardId'";
+    $queryComment = $conn->query($sqlComment);
+    $resultsComment = $queryComment->fetchAll(PDO::FETCH_ASSOC);
+    print_r($resultsComment);
 ?>
 
 <div class="container">
