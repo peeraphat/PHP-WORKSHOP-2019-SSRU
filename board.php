@@ -32,6 +32,7 @@
         } else if($action === 'deleteComment') {
             $commentId = $_GET['commentId'];
             $boardId = $_GET['boardId'];
+            
             $sql = "DELETE FROM table_comment WHERE comment_id = '$commentId'";
             $result = $conn->exec($sql);
 

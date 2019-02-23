@@ -1,6 +1,10 @@
 <?php include 'template/header.php'; ?>
 <?php 
-    $sql = "SELECT * FROM table_board";
+    $sql = "SELECT * FROM table_board
+            INNER JOIN table_member
+            ON table_board.board_member_id 
+            = table_member.member_id";
+
     $query = $conn->query($sql);
     $results = $query->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -15,6 +19,7 @@
           <th scope="col">#</th>
           <th scope="col">Topic</th>
           <th scope="col">Date</th>
+          <th scope="col">Author</th>
         </tr>
       </thead>
       <tbody>
@@ -27,6 +32,7 @@
                   </a>
                 </td>
                 <td><?php echo $value['board_date']; ?></td>
+                <td><?php echo $value['member_name']; ?></td>
           </tr> 
         <?php endforeach; ?>
       </tbody>
