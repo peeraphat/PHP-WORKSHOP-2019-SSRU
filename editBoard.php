@@ -7,7 +7,7 @@
         if ($action === 'edit') {
             $topic = $_POST['topic'];
             $content = $_POST['content'];
-
+         // https://goo.gl/5h2Jt1 --> Github
             $sql = "UPDATE table_board 
                     SET board_topic='$topic' ,
                         board_content='$content'
@@ -46,9 +46,7 @@
         </div>
         <div class="form-group">
             <label for="content">Content</label>
-            <textarea class="form-control" name="content" id="content" cols="30" rows="10">
-                <?php echo $result['board_content']; ?>
-            </textarea>
+            <textarea class="form-control" name="content" id="content" cols="30" rows="10"><?php echo $result['board_content']; ?></textarea>
         </div>
 
         <input type="submit" class="btn btn-primary" value="Edit"/>

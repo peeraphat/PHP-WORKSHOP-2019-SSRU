@@ -1,5 +1,24 @@
 <?php include 'template/header.php'; ?>
+<?php
+    $action = $_GET['action'];
+    $boardId = $_GET['boardId'];
 
+    if($action) {
+        if($action === 'delete') {
+            $sql = "DELETE FROM table_board WHERE board_id = '$boardId'";
+            $result = $conn->exec($sql);
+
+            if ($result) {
+                echo "<script>alert('ลบสำเร็จแล้วนะ')</script>";
+                echo "<script>window.location = 'myBoard.php'</script>";
+            } else {
+                echo "<script>alert('มีบางอย่างผิดพลาด')</script>";
+                echo "<script>window.history.back()</script>";
+            }
+            exit();
+        }
+    }
+?>
 <?php 
     $userId = $_SESSION['user_id'];
     $sql = "SELECT * FROM table_board
@@ -7,6 +26,7 @@
     $query = $conn->query($sql);
     $results = $query->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
 <div class="container">
     <h1>My Board</h1>
     <table class="table">
@@ -30,7 +50,7 @@
                     <td><?php echo $value['board_date']; ?></td>
                     <td>
                         <a href="editBoard.php?boardId=<?php echo $value['board_id']; ?>">Edit</a> | 
-                        <a href="#">Delete</a>
+                        <a href="#" onClick="deleteBoard(<?php echo $value['board_id']; ?>)">Delete</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -39,3 +59,12 @@
 </div>
 
 <?php include 'template/footer.php'; ?>
+
+<script>
+    function deleteBoard(boardId) {
+        const cf = confirm('คุณต้องการจะลบจริงหรืออ');
+        if(cf == true) {
+            window.location = 'myBoard.php?action=delete&boardId=' + boardId;
+        }
+    }
+</script>
