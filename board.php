@@ -78,6 +78,7 @@
         <hr>
     <?php endforeach; ?>
     </div>
+    <?php if($_SESSION['username']): ?>
     <hr />
     <div class="wrap-form">
         <form action="board.php?action=comment&boardId=<?php echo $result['board_id']; ?>" method="post">
@@ -85,6 +86,7 @@
             <input class="btn btn-primary" type="submit" value="Comment">
         </form>
     </div>
+    <?php endif; ?>
 </div>
 
 <?php include 'template/footer.php'; ?>

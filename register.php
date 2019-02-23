@@ -1,5 +1,10 @@
 <?php include 'template/header.php'; ?>
-
+<?php 
+    if($_SESSION['username']) {
+        header('Location: home.php');
+        exit();
+    }
+?>
 <?php 
     $action = $_GET['action'];
 

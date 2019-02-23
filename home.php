@@ -31,7 +31,13 @@
                     <?php echo $value['board_topic']; ?>
                   </a>
                 </td>
-                <td><?php echo $value['board_date']; ?></td>
+                <td>
+                  <?php 
+                    date_default_timezone_set("Asia/Bangkok");
+                    $date = new DateTime($value['board_date']);
+                    echo $date->format('D, d-m-Y');
+                  ?>
+                </td>
                 <td><?php echo $value['member_name']; ?></td>
           </tr> 
         <?php endforeach; ?>
