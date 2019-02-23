@@ -29,6 +29,20 @@
                 echo "<script>window.history.back()</script>";
             }
             exit();
+        } else if($action === 'deleteComment') {
+            $commentId = $_GET['commentId'];
+            $boardId = $_GET['boardId'];
+            $sql = "DELETE FROM table_comment WHERE comment_id = '$commentId'";
+            $result = $conn->exec($sql);
+
+            if($result) {
+                echo "<script>alert('ลบคอมเมนต์สำเร็จ')</script>";
+                echo "<script>window.location = 'board.php?boardId=$boardId'</script>";
+            } else {
+                echo "<script>alert('มีบางอย่างผิดพลาด')</script>";
+                echo "<script>window.history.back()</script>";
+            }
+            exit();
         }
     }
 ?>
@@ -57,6 +71,10 @@
     <?php foreach($resultsComment as $key => $comment): ?>
         <div>Comment #<?php echo $key+1 ?></div>
         <p><?php echo $comment['comment_content'] ?></p>
+        <?php if($_SESSION['user_id'] === $comment['comment_member_id']): ?>
+            <a href="#" onClick="deleteComment(<?php echo $comment['comment_id']; ?>, <?php echo $boardId ?>)">delete comment</a>
+        <?php endif; ?>
+        <hr>
     <?php endforeach; ?>
     </div>
     <hr />
@@ -69,3 +87,12 @@
 </div>
 
 <?php include 'template/footer.php'; ?>
+
+<script>
+    function deleteComment(commentId, boardId) {
+        const cf = confirm('จะลบคอมเม้นนี้จริงหรอ');
+        if(cf) {
+            window.location = 'board.php?action=deleteComment&commentId=' + commentId + '&boardId=' + boardId;
+        }
+    }  
+</script>
