@@ -45,7 +45,6 @@
                     WHERE comment_board_id = '$boardId'";
     $queryComment = $conn->query($sqlComment);
     $resultsComment = $queryComment->fetchAll(PDO::FETCH_ASSOC);
-    print_r($resultsComment);
 ?>
 
 <div class="container">
@@ -53,8 +52,15 @@
 
     <h3><?php echo $result['board_topic']; ?></h3>
     <p><?php echo $result['board_content']; ?></p>
-
+    <hr />
     <div class="wrap-comment">
+    <?php foreach($resultsComment as $key => $comment): ?>
+        <div>Comment #<?php echo $key+1 ?></div>
+        <p><?php echo $comment['comment_content'] ?></p>
+    <?php endforeach; ?>
+    </div>
+    <hr />
+    <div class="wrap-form">
         <form action="board.php?action=comment&boardId=<?php echo $result['board_id']; ?>" method="post">
             <textarea class="form-control" name="comment" id="" cols="30" rows="10"></textarea>
             <input class="btn btn-primary" type="submit" value="Comment">
