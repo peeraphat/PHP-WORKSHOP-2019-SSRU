@@ -7,6 +7,7 @@
         if($action === 'delete') {
             $sql = "DELETE FROM table_board WHERE board_id = '$boardId'";
             $result = $conn->exec($sql);
+            // https://goo.gl/5h2Jt1 --> Github
 
             if ($result) {
                 echo "<script>alert('ลบสำเร็จแล้วนะ')</script>";

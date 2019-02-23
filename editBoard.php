@@ -7,7 +7,6 @@
         if ($action === 'edit') {
             $topic = $_POST['topic'];
             $content = $_POST['content'];
-         // https://goo.gl/5h2Jt1 --> Github
             $sql = "UPDATE table_board 
                     SET board_topic='$topic' ,
                         board_content='$content'
